@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical" >
+
+    <com.zhangyihao.component.controls.ClearEditText
+            android:id="@+id/activity_login_username"
+            android:layout_width="fill_parent"
+            android:layout_height="47dp"
+            android:drawableLeft="@drawable/login_username"
+            android:drawableStart="@drawable/login_username"
+            android:hint="请输入用户名"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColorHint="#cacaca"
+            android:textSize="15sp" >
+        </com.zhangyihao.component.controls.ClearEditText>
+
+        <com.zhangyihao.component.controls.ClearEditText
+            android:id="@+id/activity_login_password"
+            android:layout_width="fill_parent"
+            android:layout_height="47dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/login_pwd"
+            android:drawableStart="@drawable/login_pwd"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColorHint="#cacaca"
+            android:textSize="15sp" >
+        </com.zhangyihao.component.controls.ClearEditText>
+
+</LinearLayout>
