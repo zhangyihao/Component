@@ -1,7 +1,6 @@
-package com.zhangyihao.component.controls;
+package com.jiuqi.app.gams.controls;
 
-
-import com.zhangyihao.component.R;
+import com.jiuqi.app.gams.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,6 +18,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
     private Drawable mClearDrawable;
     /** 添加焦点监听事件 */
     private OnFocusChangeListener onFocusChangeListener;
+    private boolean hasFocus;
     
     public ClearEditText(Context context) { 
     	this(context, null); 
@@ -35,6 +35,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
     }
     
     private void init() {
+    	this.hasFocus = false;
     	this.setFocusable(true);
     	this.setFocusableInTouchMode(true);
     	//获取EditText的DrawableRight,假如没有设置我们就使用默认的图片
@@ -52,6 +53,10 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
         addTextChangedListener(this); 
     }
     
+    /**
+     * 添加焦点监听事件
+     * @param onFocusChangeListener
+     */
     public void addOnFocusChangeListener(OnFocusChangeListener onFocusChangeListener) {
     	this.onFocusChangeListener = onFocusChangeListener;
     }
@@ -83,14 +88,19 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
      */
     @Override 
     public void onFocusChange(View v, boolean hasFocus) {
+    	this.hasFocus = hasFocus;
     	if(this.onFocusChangeListener!=null) {
     		this.onFocusChangeListener.onFocusChange(v, hasFocus);
     	}
-    	focusChangedEvent(hasFocus);
+    	focusChangedEvent();
     }
     
-    private void focusChangedEvent(boolean focused) {
-    	if (focused) {
+    /**
+     * 当焦点发生变化时，是否隐藏清楚文本图标
+     * @param focused
+     */
+    private void focusChangedEvent() {
+    	if (this.hasFocus) {
         	String s = this.getText().toString();
         	if(s!=null && !"".equals(s)) {
         		setClearIconVisible(true);
@@ -116,11 +126,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
      */
     @Override 
     public void onTextChanged(CharSequence s, int start, int count, int after) {
-    	if(s==null || "".equals(s) || s.length()<1      ) {
-    		setClearIconVisible(false);
-    	} else {
-    		setClearIconVisible(true);
-    	}
+    	focusChangedEvent();
     } 
  
     @Override 
